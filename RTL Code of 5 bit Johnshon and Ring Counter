@@ -1,0 +1,18 @@
+module counters (  
+input wire clk_in,  
+input wire reset_in,  
+output reg [4:0] johnson_count,  
+output reg [4:0] ring_count );  
+always @(posedge clk_in or posedge reset_in) begin  
+if (reset_in) begin  
+johnson_count <= 5'b00000;  
+end else begin  
+johnson_count <= {johnson_count[3:0], ~johnson_count[4]};  
+end end  
+always @(posedge clk_in or posedge reset_in) begin  
+if (reset_in) begin  
+ring_count <= 5'b00001;  
+end else begin  
+ring_count <= {ring_count[3:0], ring_count[4]};  
+end end  
+endmodule  
